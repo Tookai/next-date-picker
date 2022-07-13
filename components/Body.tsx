@@ -3,6 +3,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { dateStore } from "../store/dateStore";
+import DayItem from "./DayItem";
 
 interface IProps {
   dateFor: "beforeDate" | "afterDate";
@@ -17,47 +18,6 @@ const Body = ({ dateFor }: IProps) => {
   const [days, setDays] = useState<Dayjs[] | null>(null);
   const [beforeDays, setBeforeDays] = useState<Dayjs[] | null>(null);
   const [afterDays, setAfterDays] = useState<Dayjs[] | null>(null);
-
-  const handleClick = (day: Dayjs) => {
-    if (dateFor === "beforeDate") {
-      setDate({
-        ...date,
-        beforeDate: day,
-      });
-    }
-
-    if (dateFor === "afterDate") {
-      setDate({
-        ...date,
-        afterDate: day,
-      });
-    }
-  };
-
-  const handleBackgroundColor = (day: Dayjs) => {
-    if (date.beforeDate && date.beforeDate.isSame(dayjs(day))) {
-      return "purple.800";
-    }
-
-    if (date.afterDate && date.afterDate.isSame(dayjs(day))) {
-      return "red.800";
-    }
-
-    if (date.beforeDate && date.afterDate) {
-      if (dayjs(day) < date.beforeDate && dayjs(day) > date.afterDate) {
-        return "green.800";
-      }
-    }
-
-    if (dayjs(day).month() < dayjs(date.currentDate).month()) {
-      return "gray.500";
-    }
-    if (dayjs(day).month() > dayjs(date.currentDate).month()) {
-      return "gray.500";
-    }
-
-    return "gray.900";
-  };
 
   useEffect(() => {
     setAfterDays(null);
@@ -117,7 +77,7 @@ const Body = ({ dateFor }: IProps) => {
       <SimpleGrid columns={7}>
         {shortDaysArray.map((day, index) => (
           <Box key={index} p={2} m={1}>
-            <Text>{day}</Text>
+            <Text textAlign={"center"}>{day}</Text>
           </Box>
         ))}
       </SimpleGrid>
@@ -125,47 +85,17 @@ const Body = ({ dateFor }: IProps) => {
       <SimpleGrid columns={7}>
         {beforeDays &&
           beforeDays.map((day, index) => (
-            <Box
-              key={index}
-              p={2}
-              m={1}
-              cursor={"pointer"}
-              rounded={"md"}
-              bg={handleBackgroundColor(day)}
-              onClick={() => handleClick(day)}
-            >
-              <Text>{dayjs(day).format("ddd DD")}</Text>
-            </Box>
+            <DayItem key={index} day={day} dateFor={dateFor} />
           ))}
 
         {days &&
           days.map((day, index) => (
-            <Box
-              key={index}
-              p={2}
-              bg={handleBackgroundColor(day)}
-              m={1}
-              cursor={"pointer"}
-              rounded={"md"}
-              onClick={() => handleClick(day)}
-            >
-              <Text textAlign={"center"}>{dayjs(day).format("ddd DD")}</Text>
-            </Box>
+            <DayItem key={index} day={day} dateFor={dateFor} />
           ))}
 
         {afterDays &&
           afterDays.map((day, index) => (
-            <Box
-              key={index}
-              p={2}
-              m={1}
-              cursor={"pointer"}
-              rounded={"md"}
-              bg={handleBackgroundColor(day)}
-              onClick={() => handleClick(day)}
-            >
-              <Text>{dayjs(day).format("ddd DD")}</Text>
-            </Box>
+            <DayItem key={index} day={day} dateFor={dateFor} />
           ))}
       </SimpleGrid>
     </PopoverBody>

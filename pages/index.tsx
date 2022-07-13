@@ -1,4 +1,11 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Switch,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import dayjs from "dayjs";
 import type { NextPage } from "next";
 import { useRecoilState } from "recoil";
@@ -7,12 +14,25 @@ import { dateStore } from "../store/dateStore";
 
 const Home: NextPage = () => {
   const [date, setDate] = useRecoilState(dateStore);
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Flex width={"100vw"} height={"100vh"} flexDir={"column"}>
       <Heading textAlign={"center"} width={"full"} py={2}>
         Hello world
       </Heading>
+      <Flex
+        justifyContent={"center"}
+        alignItems={"center"}
+        width={"full"}
+        py={2}
+      >
+        <Switch
+          mx={"auto"}
+          isChecked={colorMode === "dark"}
+          onChange={toggleColorMode}
+        />
+      </Flex>
 
       <Flex
         flex={2}
@@ -31,10 +51,8 @@ const Home: NextPage = () => {
           <Box mt={10}>
             <Text textAlign={"center"}>
               You would be loaning the item for{" "}
-              {date.beforeDate &&
-                date.afterDate &&
-                dayjs(date.beforeDate).diff(dayjs(date.afterDate), "day")}{" "}
-              days.
+              {dayjs(date.beforeDate).diff(dayjs(date.afterDate), "day")}{" "}
+              day(s).
             </Text>
 
             <Text textAlign={"center"}>

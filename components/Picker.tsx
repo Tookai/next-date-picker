@@ -1,4 +1,4 @@
-import { PopoverCloseButton, PopoverContent } from "@chakra-ui/react";
+import { PopoverArrow, PopoverCloseButton, PopoverContent } from "@chakra-ui/react";
 import Body from "./Body";
 import Header from "./Header";
 
@@ -9,6 +9,7 @@ interface IProps {
 const Picker = ({ dateFor }: IProps) => {
   return (
     <PopoverContent width={"auto"}>
+      <PopoverArrow />
       <PopoverCloseButton />
       <Header dateFor={dateFor}  />
       <Body dateFor={dateFor} />
