@@ -2,14 +2,16 @@ import { PopoverCloseButton, PopoverContent } from "@chakra-ui/react";
 import Body from "./Body";
 import Header from "./Header";
 
-interface IProps {}
+interface IProps {
+  dateFor: "afterDate" | "beforeDate";
+}
 
-const Picker = ({}: IProps) => {
+const Picker = ({ dateFor }: IProps) => {
   return (
     <PopoverContent width={"auto"}>
       <PopoverCloseButton />
-      <Header />
-      <Body />
+      <Header dateFor={dateFor}  />
+      <Body dateFor={dateFor} />
     </PopoverContent>
   );
 };
