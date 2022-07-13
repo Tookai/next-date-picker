@@ -60,6 +60,10 @@ const Body = ({ dateFor }: IProps) => {
   };
 
   useEffect(() => {
+    setAfterDays(null);
+    setBeforeDays(null);
+    setDays(null);
+
     const start = dayjs(date.currentDate).startOf("month");
     const end = dayjs(date.currentDate).endOf("month");
 
@@ -74,9 +78,9 @@ const Body = ({ dateFor }: IProps) => {
 
     // if first day of month is not monday add days until monday
     if (start.day() !== 1) {
-      const startDay = start.day();
+      const startDay = start.day() === 0 ? 7 : start.day();
 
-      console.log(startDay);
+      console.log("start day", startDay);
 
       const beforeDays = [];
       for (let index = 1; index < startDay; index++) {
@@ -84,8 +88,6 @@ const Body = ({ dateFor }: IProps) => {
         day = day.subtract(index, "day");
         beforeDays.push(day);
       }
-
-      console.log(beforeDays);
 
       // reverse array to get correct order
       beforeDays.reverse();
@@ -97,7 +99,7 @@ const Body = ({ dateFor }: IProps) => {
     if (end.day() !== 0) {
       const endDay = 7 - end.day();
 
-      console.log(endDay);
+      console.log("end day", endDay);
 
       const afterDays = [];
       for (let index = 0; index < endDay; index++) {

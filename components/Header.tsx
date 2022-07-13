@@ -30,7 +30,7 @@ const Header = ({ dateFor }: IProps) => {
         <Button variant={"unstyled"} onClick={handlePreviousMonth}>
           {"<"}
         </Button>
-        <Text>{dayjs(date.currentDate).format("MMMM")}</Text>
+        <Text>{dayjs(date.currentDate).format("MMMM YYYY")}</Text>
         <Button variant={"unstyled"} onClick={handleNextMonth}>
           {">"}
         </Button>

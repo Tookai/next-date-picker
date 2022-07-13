@@ -13,7 +13,6 @@ const Calendar = ({}: IProps) => {
       p={5}
       border={"1px"}
       rounded={"lg"}
-      experimental_spaceX={10}
       width={"60%"}
       justifyContent={"space-evenly"}
     >
