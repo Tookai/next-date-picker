@@ -47,6 +47,7 @@ const Home: NextPage = () => {
           fontSize={"lg"}
           href={"https://github.com/Tookai/next-date-picker"}
           textDecoration={"underline"}
+          target={"_blank"}
         >
           Next.JS Date Picker
         </Link>
