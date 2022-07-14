@@ -56,7 +56,7 @@ const Home: NextPage = () => {
             </Text>
 
             <Text textAlign={"center"}>
-              At a rate of 3$ per day, you would be paying{" "}
+              At a rate of 3$ per day, you would pay{" "}
               {dayjs(date.beforeDate).diff(dayjs(date.afterDate), "day") * 3}$.
             </Text>
           </Box>

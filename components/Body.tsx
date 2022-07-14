@@ -43,9 +43,9 @@ const Body = ({ dateFor }: IProps) => {
       console.log("start day", startDay);
 
       const beforeDays = [];
+      let day = start;
       for (let index = 1; index < startDay; index++) {
-        let day = start;
-        day = day.subtract(index, "day");
+        day = day.subtract(1, "day");
         beforeDays.push(day);
       }
 
@@ -62,9 +62,9 @@ const Body = ({ dateFor }: IProps) => {
       console.log("end day", endDay);
 
       const afterDays = [];
+      let day = end;
       for (let index = 0; index < endDay; index++) {
-        let day = end;
-        day = day.add(index + 1, "day");
+        day = day.add(1, "day");
         afterDays.push(day);
       }
 
