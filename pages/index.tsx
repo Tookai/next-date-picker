@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useRecoilState } from "recoil";
 import Calendar from "../components/Calendar";
 import { dateStore } from "../store/dateStore";
@@ -18,71 +19,78 @@ const Home: NextPage = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Flex
-      width={"100vw"}
-      height={"100vh"}
-      flexDir={"column"}
-      experimental_spaceY={12}
-    >
-      <Heading textAlign={"center"} width={"full"} py={2}>
-        Hello world
-      </Heading>
-
-      <Flex justifyContent={"center"} alignItems={"center"} width={"full"}>
-        <Switch
-          mx={"auto"}
-          isChecked={colorMode === "dark"}
-          onChange={toggleColorMode}
-        />
-      </Flex>
+    <>
+      <Head>
+        <title>Next.JS Date Picker</title>
+      </Head>
 
       <Flex
-        justifyContent={"center"}
-        alignItems={"center"}
-        width={"full"}
+        width={"100vw"}
+        height={"100vh"}
         flexDir={"column"}
+        experimental_spaceY={12}
       >
-        <Text fontSize={"2xl"}>Github repository:</Text>
-        <Link
-          fontSize={"lg"}
-          href={"https://github.com/Tookai/next-date-picker"}
-          textDecoration={"underline"}
-          target={"_blank"}
+        <Heading textAlign={"center"} width={"full"} py={2}>
+          Hello world
+        </Heading>
+
+        <Flex justifyContent={"center"} alignItems={"center"} width={"full"}>
+          <Switch
+            mx={"auto"}
+            isChecked={colorMode === "dark"}
+            onChange={toggleColorMode}
+          />
+        </Flex>
+
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          width={"full"}
+          flexDir={"column"}
         >
-          Next.JS Date Picker
-        </Link>
+          <Text fontSize={"2xl"}>Github repository:</Text>
+          <Link
+            fontSize={"lg"}
+            href={"https://github.com/Tookai/next-date-picker"}
+            textDecoration={"underline"}
+            target={"_blank"}
+          >
+            Next.JS Date Picker
+          </Link>
 
-        <Text fontSize={"xs"} opacity={"0.5"}>
-          With TypeScript, Chakra.UI & DayJS
-        </Text>
+          <Text fontSize={"xs"} opacity={"0.5"}>
+            With TypeScript, Chakra.UI & DayJS
+          </Text>
+        </Flex>
+
+        <Flex
+          justifyContent={"center"}
+          alignItems={"center"}
+          flexDir={"column"}
+          h={"100px"}
+        >
+          {date.beforeDate && date.afterDate && (
+            <Box>
+              <Text textAlign={"center"}>
+                You would be loaning the item for{" "}
+                {dayjs(date.beforeDate).diff(dayjs(date.afterDate), "day")}{" "}
+                day(s).
+              </Text>
+
+              <Text textAlign={"center"}>
+                At a rate of 3$ per day, you would pay{" "}
+                {dayjs(date.beforeDate).diff(dayjs(date.afterDate), "day") * 3}
+                $.
+              </Text>
+            </Box>
+          )}
+        </Flex>
+
+        <Flex justifyContent={"center"} alignItems={"center"}>
+          <Calendar />
+        </Flex>
       </Flex>
-
-      <Flex
-        justifyContent={"center"}
-        alignItems={"center"}
-        flexDir={"column"}
-        h={"100px"}
-      >
-        {date.beforeDate && date.afterDate && (
-          <Box>
-            <Text textAlign={"center"}>
-              You would be loaning the item for{" "}
-              {dayjs(date.beforeDate).diff(dayjs(date.afterDate), "day")}{" "}
-              day(s).
-            </Text>
-
-            <Text textAlign={"center"}>
-              At a rate of 3$ per day, you would pay{" "}
-              {dayjs(date.beforeDate).diff(dayjs(date.afterDate), "day") * 3}$.
-            </Text>
-          </Box>
-        )}
-      </Flex>
-
-      <Flex justifyContent={"center"} alignItems={"center"}>
-        <Calendar />
-      </Flex>
-    </Flex>
+    </>
   );
 };
 
