@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       width={"100vw"}
       height={"100vh"}
       flexDir={"column"}
-      experimental_spaceY={16}
+      experimental_spaceY={12}
     >
       <Heading textAlign={"center"} width={"full"} py={2}>
         Hello world
@@ -57,7 +57,12 @@ const Home: NextPage = () => {
         </Text>
       </Flex>
 
-      <Flex justifyContent={"center"} alignItems={"center"} flexDir={"column"}>
+      <Flex
+        justifyContent={"center"}
+        alignItems={"center"}
+        flexDir={"column"}
+        h={"100px"}
+      >
         {date.beforeDate && date.afterDate && (
           <Box>
             <Text textAlign={"center"}>
