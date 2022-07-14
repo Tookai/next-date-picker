@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const Body = ({ dateFor }: IProps) => {
-  const shortDaysArray = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+  const shortDaysArray = ["Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam.", "Dim."];
 
   // useRecoilState
   const [date, setDate] = useRecoilState(dateStore);

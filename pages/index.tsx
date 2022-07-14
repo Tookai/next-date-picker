@@ -2,6 +2,7 @@ import {
   Box,
   Flex,
   Heading,
+  Link,
   Switch,
   Text,
   useColorMode,
@@ -17,16 +18,17 @@ const Home: NextPage = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Flex width={"100vw"} height={"100vh"} flexDir={"column"}>
+    <Flex
+      width={"100vw"}
+      height={"100vh"}
+      flexDir={"column"}
+      experimental_spaceY={16}
+    >
       <Heading textAlign={"center"} width={"full"} py={2}>
         Hello world
       </Heading>
-      <Flex
-        justifyContent={"center"}
-        alignItems={"center"}
-        width={"full"}
-        py={2}
-      >
+
+      <Flex justifyContent={"center"} alignItems={"center"} width={"full"}>
         <Switch
           mx={"auto"}
           isChecked={colorMode === "dark"}
@@ -35,20 +37,28 @@ const Home: NextPage = () => {
       </Flex>
 
       <Flex
-        flex={2}
         justifyContent={"center"}
         alignItems={"center"}
+        width={"full"}
         flexDir={"column"}
       >
-        <Text textAlign={"center"}>
-          {date.afterDate && dayjs(date.afterDate).format("dddd DD MMMM YYYY")}
+        <Text fontSize={"2xl"}>Github repository:</Text>
+        <Link
+          fontSize={"lg"}
+          href={"https://github.com/Tookai/next-date-picker"}
+          textDecoration={"underline"}
+        >
+          Next.JS Date Picker
+        </Link>
+
+        <Text fontSize={"xs"} opacity={"0.5"}>
+          With TypeScript, Chakra.UI & DayJS
         </Text>
-        <Text textAlign={"center"}>
-          {date.beforeDate &&
-            dayjs(date.beforeDate).format("dddd DD MMMM YYYY")}
-        </Text>
+      </Flex>
+
+      <Flex justifyContent={"center"} alignItems={"center"} flexDir={"column"}>
         {date.beforeDate && date.afterDate && (
-          <Box mt={10}>
+          <Box>
             <Text textAlign={"center"}>
               You would be loaning the item for{" "}
               {dayjs(date.beforeDate).diff(dayjs(date.afterDate), "day")}{" "}
@@ -63,7 +73,7 @@ const Home: NextPage = () => {
         )}
       </Flex>
 
-      <Flex justifyContent={"center"} alignItems={"center"} flex={10}>
+      <Flex justifyContent={"center"} alignItems={"center"}>
         <Calendar />
       </Flex>
     </Flex>
