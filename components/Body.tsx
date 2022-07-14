@@ -40,8 +40,6 @@ const Body = ({ dateFor }: IProps) => {
     if (start.day() !== 1) {
       const startDay = start.day() === 0 ? 7 : start.day();
 
-      console.log("start day", startDay);
-
       const beforeDays = [];
       let day = start;
       for (let index = 1; index < startDay; index++) {
@@ -58,8 +56,6 @@ const Body = ({ dateFor }: IProps) => {
     // if last day of month is not sunday add days until sunday
     if (end.day() !== 0) {
       const endDay = 7 - end.day();
-
-      console.log("end day", endDay);
 
       const afterDays = [];
       let day = end;
